@@ -1,6 +1,14 @@
 public class Circle {
     public Circle(CircleId id, CircleName name, User owner, List<User> members){
-        //TODO
+        if(id == null) throw new ArgumentNullException(nameof(id));
+        if(name == null) throw new ArgumentNullException(nameof(name));
+        if(owner == null) throw new ArgumentNullException(nameof(owner));
+        if(members == null) throw new ArgumentNullException(nameof(members));
+
+        Id = id;
+        Name = name;
+        Owner = owner;
+        Members = members;
     }
 
     public CircleId Id { get; }
