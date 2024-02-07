@@ -50,12 +50,7 @@ public class CircleApplicationService{
                 throw new CircleNotFoundException(id, "サークルが見つかりませんでした");
             }
 
-            // サークルのオーナーを含めて30名か確認
-            if(circle.Members.Count >= 29){
-                throw new CircleFullException(id);
-            }
-
-            circle.Members.Add(member);
+            circle.Join(member);
             circleRepository.Save(circle);
 
             transaction.Complete();
