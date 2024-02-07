@@ -35,4 +35,30 @@ public class CircleApplicationService{
             transaction.Complete();
         }
     }
+
+    public void Join(CircleJoinCommand command){
+        using(var transaction = new TransactionScope()){
+            var memberId = new UserId(command.UserId);
+            var member = userRepository.Find(memberId);
+            if(member == null){
+                throw new UserNotFoundException(memberId, "ユーザが見つかりませんでした");
+            }
+
+            var id = new CircleId(command.CircleId);
+            var circle = circleRepository.Find(id);
+            if(circle == null){
+                throw new CircleNotFoundException(id, "サークルが見つかりませんでした");
+            }
+
+            // サークルのオーナーを含めて30名か確認
+            if(circle.Members.Count >= 29){
+                throw new CircleFullException(id);
+            }
+
+            circle.Members.Add(member);
+            circleRepository.Save(circle);
+
+            transaction.Complete();
+        }
+    }
 }
