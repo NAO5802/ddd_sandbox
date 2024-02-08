@@ -18,6 +18,7 @@ public class Circle
     }
 
     public bool isFull(){
+        // サークルのオーナーを含めて30名か確認
         return members.Count >= 29;
     }
 
@@ -25,7 +26,6 @@ public class Circle
     {
         if (member == null) throw new ArgumentNullException(nameof(member));
 
-        // サークルのオーナーを含めて30名か確認
         if (isFull())
         {
             throw new CircleFullException(id);
