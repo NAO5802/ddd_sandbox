@@ -17,12 +17,16 @@ public class Circle
         Members = members;
     }
 
+    public bool isFull(){
+        return members.Count >= 29;
+    }
+
     public void Join(User member)
     {
         if (member == null) throw new ArgumentNullException(nameof(member));
 
         // サークルのオーナーを含めて30名か確認
-        if (circle.Members.Count >= 29)
+        if (isFull())
         {
             throw new CircleFullException(id);
         }
