@@ -2,7 +2,9 @@ public class Circle
 {
     private readonly CircleId id;
     private User owner;
-    private List<User> members;
+    // private List<User> members;
+    // Circle集約にmembersを直接持たせずに、idだけを持つようにする。不意にUserのメソッドを呼び出して変更してしまうことを防ぐ
+    private List<UserId> memberIds;
 
     public Circle(CircleId id, CircleName name, User owner, List<User> members)
     {
@@ -36,4 +38,5 @@ public class Circle
 
     public CircleId Id { get; }
     public CircleName Name { get; private set; }
+    public List<UserId> MemberIds { get; private set; }
 }
