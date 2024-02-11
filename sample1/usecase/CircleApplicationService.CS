@@ -81,8 +81,11 @@ public class CircleApplicationService
     }
 
     public CircleGetRecommendResult GetRecommend(CircleGetRecommendRequest request){
-        // おすすめサークルを導き出す条件がリポジトリの実装クラスに依存している
-        var recommendCircles = circleRepository.FindRecommended(now);
+        var recommendCircleSpec = new CircleRecommendSpecification(now);
+
+        var circles = circleRepository.FindAll();
+        var recommendCircles = circles.Where(recommendCircleSpec.IsSatisfiedBy).Take(10).ToList();
+
         return new CircleGetRecommendResult(recommendCircles);
     }
 }
