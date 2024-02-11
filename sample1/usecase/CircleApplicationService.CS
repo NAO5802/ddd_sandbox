@@ -86,4 +86,22 @@ public class CircleApplicationService
 
         return new CircleGetRecommendResult(recommendCircles);
     }
+
+    public CircleGetSummariesResult GetSummaries(CircleGetSummariesCommand command)
+    {
+        // ドメインの防衛はできるが、パフォーマンスが悪くなる
+        //  全件取得
+        var all = circleRepository.FindAll();
+
+        //  ページング
+        var circles = all.Skip((command.Page -1) * commandSize).Take(command.Size);
+
+        var summaries = new List<CircleSummaryData>();
+        foreach(var circle in circles){
+            var owner = userRepository.Find(circle.Owner.Id);
+            summaries.Add(new CircleSummaryData(circle.Id.Value, owner.Name.Value));
+        }
+
+        return new CircleGetSummariesResult(summaries);
+    }
 }
