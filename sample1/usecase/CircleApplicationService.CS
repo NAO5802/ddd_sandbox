@@ -60,8 +60,13 @@ public class CircleApplicationService
                 throw new CircleNotFoundException(circleId, "サークルが見つかりませんでした");
             }
 
-            var circleFullSpecification = new CircleFullSpecification(userRepository);
-            if (circleFullSpecification.IsSatisfiedBy(circle))
+            // FCCに詰め替えるのをアプリケーションサービスで行う(直接userRepositoryをもたせない)
+            var owner = userRepository.Find(circle.Owner.Id);
+            var members = userRepository.Find(circle.MemberIds);
+            var circleMembers = circleMembers(circleId, owner, members);
+
+            var circleFullSpecification = new CircleFullSpecification();
+            if (circleFullSpecification.IsSatisfiedBy(circleMembers))
             {
                 throw new CircleFullException(circleId, "サークルが一杯です");
             }
