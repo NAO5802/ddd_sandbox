@@ -20,8 +20,11 @@ public class Circle
     }
 
     public bool isFull(){
-        // サークルのオーナーを含めて30名か確認
-        return memberIds.Count >= 29;
+        return memberIds.Count >= 30;
+    }
+
+    public int CountMembers(){
+        return memberIds.Count + owner.Count;
     }
 
     public void Join(UserId memberId)
