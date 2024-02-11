@@ -5,6 +5,8 @@ public class CircleApplicationService
     private readonly CircleService circleService;
     private readonly IUserRepository userRepository;
 
+    private readonly DateTime now;
+
     public CircleApplicationService(
         ICircleFactory circleFactory,
         ICircleRepository circleRepository,
@@ -76,5 +78,11 @@ public class CircleApplicationService
 
             transaction.Complete();
         }
+    }
+
+    public CircleGetRecommendResult GetRecommend(CircleGetRecommendRequest request){
+        // おすすめサークルを導き出す条件がリポジトリの実装クラスに依存している
+        var recommendCircles = circleRepository.FindRecommended(now);
+        return new CircleGetRecommendResult(recommendCircles);
     }
 }
