@@ -61,7 +61,7 @@ public class CircleApplicationService
             }
 
             var circleFullSpecification = new CircleFullSpecification(userRepository);
-            if (circleFullSpecification.IsSatisfiedBy(circle)
+            if (circleFullSpecification.IsSatisfiedBy(circle))
             {
                 throw new CircleFullException(circleId, "サークルが一杯です");
             }
