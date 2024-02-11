@@ -82,9 +82,7 @@ public class CircleApplicationService
 
     public CircleGetRecommendResult GetRecommend(CircleGetRecommendRequest request){
         var recommendCircleSpec = new CircleRecommendSpecification(now);
-
-        var circles = circleRepository.FindAll();
-        var recommendCircles = circles.Where(recommendCircleSpec.IsSatisfiedBy).Take(10).ToList();
+        var recommendCircles = circleRepository.Find(recommendCircleSpec).Take(10).ToList();
 
         return new CircleGetRecommendResult(recommendCircles);
     }

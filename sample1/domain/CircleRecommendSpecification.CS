@@ -1,4 +1,5 @@
-public class CircleRecommendSpecification{
+public class CircleRecommendSpecification: ISpecification<Circle>
+{
 
     private readonly DateTime executeDateTime;
 
