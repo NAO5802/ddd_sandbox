@@ -86,7 +86,18 @@ function circumference(radius) {
     return 2 * Math.PI * radius;
 }
 
+// Add parameter
+class Book {
+    constructor() {
+        this._reservations = [];
+    }
 
+    addReservation(customer) {  this.new_addReservation(customer, false);  }
+
+    new_addReservation(customer, isPriority) {
+        this._reservations.push(customer);
+    }
+}
 
 
 
