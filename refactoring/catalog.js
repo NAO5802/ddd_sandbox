@@ -35,6 +35,7 @@ function reportLines(aCustomer) {
     return lines;
 }
 
+// Extract variable
 export function price(order) {
     const basePrice = order.quantity * order.itemPrice;
     const quantityDiscount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
@@ -56,20 +57,33 @@ class Order {
     }
 
     get price() {
-        return this.basePrice -  this.quantityDiscount + this.shipping;
+        return this.basePrice - this.quantityDiscount + this.shipping;
     }
 
-    get basePrice(){
+    get basePrice() {
         return this.quantity * this.itemPrice
     }
 
-    get quantityDiscount(){
+    get quantityDiscount() {
         return Math.max(0, this.quantity - 500) * this.itemPrice * 0.05
     }
 
-    get shipping(){
+    get shipping() {
         return Math.min(this.quantity * this.itemPrice * 0.1, 100)
     }
+}
+
+
+// Change function declaration
+/*
+    @deprecated Use `circumference` instead
+ */
+function circum(radius) {
+    return circumference(radius);
+}
+
+function circumference(radius) {
+    return 2 * Math.PI * radius;
 }
 
 
