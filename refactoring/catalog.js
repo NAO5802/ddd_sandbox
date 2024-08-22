@@ -92,7 +92,9 @@ class Book {
         this._reservations = [];
     }
 
-    addReservation(customer) {  this.new_addReservation(customer, false);  }
+    addReservation(customer) {
+        this.new_addReservation(customer, false);
+    }
 
     new_addReservation(customer, isPriority) {
         assert(isPriority === true || isPriority === false);
@@ -100,6 +102,17 @@ class Book {
     }
 }
 
+// Change parameter to property
+// function inNewEngland(aCustomer) {
+//     return new_newEnglanders(aCustomer.address.state);
+// }
+
+function inNewEngland(statusCode) {
+    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(statusCode);
+}
+
+const someCustomers = [{address: {state: "MA"}}, {address: {state: "NY"}}];
+const newEnglanders = someCustomers.filter(c => inNewEngland(c.address.state));
 
 
 
