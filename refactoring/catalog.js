@@ -95,6 +95,7 @@ class Book {
     addReservation(customer) {  this.new_addReservation(customer, false);  }
 
     new_addReservation(customer, isPriority) {
+        assert(isPriority === true || isPriority === false);
         this._reservations.push(customer);
     }
 }
